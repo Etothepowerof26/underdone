@@ -45,9 +45,9 @@ if SERVER then
 end
 
 if CLIENT then
-		usermessage.Hook("UD_UpdateStats", function(usrMsg)
-			if not LocalPlayer().SetStat then return end
-			
-		LocalPlayer():SetStat(usrMsg:ReadString(), usrMsg:ReadLong())
-		end)
+	usermessage.Hook("UD_UpdateStats", function(usrMsg)
+		if not LocalPlayer().SetStat then return end
+
+	LocalPlayer():SetStat(usrMsg:ReadString(), usrMsg:ReadLong())
+	end)
 end

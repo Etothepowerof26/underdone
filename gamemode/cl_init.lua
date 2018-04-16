@@ -40,6 +40,8 @@ concommand.Add("UD_PlaySound", function(ply, command, args)
 	ply:PlaySound(args)
 end)
 
+RunConsoleCommand("cl_phys_props_max", "99999")
+
 --[[
 local intMaxHieght = 75
 local intMinHieght = 5

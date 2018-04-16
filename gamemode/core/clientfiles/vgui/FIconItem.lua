@@ -25,14 +25,12 @@ function PANEL:Init()
 end
 
 function PANEL:OnMousePressed(mousecode)
-	if mousecode == MOUSE_LEFT then
-		if self.Draggable then
-			timer.Simple(0.1, function()
-				if self.Draggable and input.IsMouseDown(MOUSE_LEFT) then
-					GAMEMODE.DraggingPanel = self
-				end
-			end)
-		end
+	if mousecode == MOUSE_LEFT and self.Draggable then
+		timer.Simple(0.1, function()
+			if IsValid(self) and self.Draggable and input.IsMouseDown(MOUSE_LEFT) then
+				GAMEMODE.DraggingPanel = self
+			end
+		end)
 	end
 end
 
@@ -60,22 +58,22 @@ function PANEL:OnMouseReleased(mousecode)
 	end
 end
 
-function PANEL:Paint()
+function PANEL:Paint(w, h)
 	local texDrawTexture = self.Icon or matGradiantDown
 	surface.SetDrawColor(0, 0, 0, 50)
 	if texDrawTexture == self.Icon then
 		surface.SetDrawColor(table.Split(self.Color or Color(255, 255, 255, 255)))
 	end
 	surface.SetMaterial(texDrawTexture)
-	surface.DrawTexturedRect(0, 0, self:GetWide(), self:GetTall())
+	surface.DrawTexturedRect(0, 0, w, h)
 	if texDrawTexture == self.Icon then
 		surface.SetDrawColor(255, 255, 255, 70)
 		surface.SetMaterial(matGlossIcon)
-		surface.DrawTexturedRect(0, 0, self:GetWide(), self:GetTall())
+		surface.DrawTexturedRect(0, 0, w, h)
 	end
 	surface.SetDrawColor(255, 255, 255, 255)
 	surface.SetMaterial(matBoarderIcon)
-	surface.DrawTexturedRect(0, 0, self:GetWide(), self:GetTall())
+	surface.DrawTexturedRect(0, 0, w, h)
 
 	if self.Text then
 		if tonumber(self.Text) and tonumber(self.Text) >= 1000  then
@@ -85,19 +83,38 @@ function PANEL:Paint()
 				IntAmount = math.Round(tonumber(self.Text) / 1000000)
 				strPrefix = "M"
 			end
-			self.Text = IntAmount.."".. strPrefix
+			self.Text = IntAmount .. "" .. strPrefix
 		end
 		surface.SetFont("DebugFixedSmall")
 		local width, tall = surface.GetTextSize(tostring(self.Text))
 		surface.SetTextColor(255, 255, 255, 255)
-		surface.SetTextPos(self:GetWide() - width - 2, self:GetTall() - tall - 1)
+		surface.SetTextPos(w - width - 2, h - tall - 1)
 		surface.DrawText(tostring(self.Text))
 	end
+
+	-- spawnicon hover effect
+	self.OverlayFade = math.Clamp((self.OverlayFade or 0) - RealFrameTime() * 640 * 2, 0, 255)
+	if dragndrop.IsDragging() or not self:IsHovered() then return end
+	self.OverlayFade = math.Clamp(self.OverlayFade + RealFrameTime() * 640 * 8, 0, 255)
+
 	return true
 end
 
+do -- spawnicon hover effect
+	local border = 4
+	local border_w = 5
+	local matHover = Material("gui/sm_hover.png", "nocull")
+	local boxHover = GWEN.CreateTextureBorder(border, border, 64 - border * 2, 64 - border * 2, border_w, border_w, border_w, border_w, matHover)
+
+	function PANEL:PaintOver(w, h)
+		if self.OverlayFade > 0 then
+			boxHover(0, 0, w, h, Color(255, 255, 255, self.OverlayFade))
+		end
+	end
+end
+
 function PANEL:SetIcon(strIconText)
-	self.Icon = Material(strIconText)
+	self.Icon = strIconText and Material(strIconText)
 end
 
 function PANEL:SetText(strText)

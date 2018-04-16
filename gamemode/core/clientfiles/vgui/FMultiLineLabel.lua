@@ -1,12 +1,12 @@
 --[[
-										 `.--.                                                      
-	sMMMMMMMNds.    -yNMMMMMMdo`    sMMM         dMMd   `sMMNs` -MMMMs    .mMMMs  
-	sMMM+++sMMMM-  sMMMh/--+NMMN-   sMMM         dMMd  :NMMh.   -MMMMM+  `mMMMMs  
-	sMMM    hMMM/ /MMMh     -NMMm`  sMMM         dMMd`hMMm:     -MMMmMM/ hMmMMMs  
-	sMMMssymMMMy  sMMM+      dMMM-  sMMM         dMMNNMMN-      -MMM+hMNyMN-MMMs  
-	sMMMddddyo.   +MMMs     `NMMN.  sMMM         dMMNodMMMo`    -MMM+`mMMM: MMMs  
-	sMMM          `hMMMs. `:dMMM+   sMMM------.  dMMd  +NMMm:   -MMM+ .ss+  MMMs  
-	sMMM            +mMMMMMMMMy-    sMMMMMMMMMd  dMMd   .hMMMy` -MMM+       MMMs  
+										 `.--.
+	sMMMMMMMNds.    -yNMMMMMMdo`    sMMM         dMMd   `sMMNs` -MMMMs    .mMMMs
+	sMMM+++sMMMM-  sMMMh/--+NMMN-   sMMM         dMMd  :NMMh.   -MMMMM+  `mMMMMs
+	sMMM    hMMM/ /MMMh     -NMMm`  sMMM         dMMd`hMMm:     -MMMmMM/ hMmMMMs
+	sMMMssymMMMy  sMMM+      dMMM-  sMMM         dMMNNMMN-      -MMM+hMNyMN-MMMs
+	sMMMddddyo.   +MMMs     `NMMN.  sMMM         dMMNodMMMo`    -MMM+`mMMM: MMMs
+	sMMM          `hMMMs. `:dMMM+   sMMM------.  dMMd  +NMMm:   -MMM+ .ss+  MMMs
+	sMMM            +mMMMMMMMMy-    sMMMMMMMMMd  dMMd   .hMMMy` -MMM+       MMMs
 	.---              `:/++/-       .---------.  .--.     ----. `---`       ---.  2009
 ]]
 
@@ -35,13 +35,13 @@ function PANEL:Paint()
 	local intYoffset = 0
 	local intWord = 1
 	local tblCurrentLine = {}
-	
+
 	--surface.SetDrawColor(200, 200, 200, 255)
 	--surface.DrawRect(0, 0, self:GetWide(), self:GetTall())
-	
+
 	surface.SetFont(self.Font)
 	surface.SetTextColor(self.Color)
-	
+
 	for _, word in pairs(self.Text) do
 		local intStringWidth, intStringHieght = surface.GetTextSize(tostring(table.concat(tblCurrentLine, " ") .. " " .. word))
 		intStringWidth = intStringWidth + 5
@@ -59,39 +59,39 @@ function PANEL:Paint()
 		end
 		intWord = intWord + 1
 	end
-	
+
 	if not self.FixedHieght and self:GetTall() ~= intYoffset + 2 then
 		self:SetTall(intYoffset + 2)
 		self:GetParent():InvalidateLayout()
 	end
-	
+
 	return true
 end
 
 function PANEL:SetText(text)
 	self.Text = string.Explode(" ", text)
-end 
+end
 function PANEL:GetText()
 	return self.Text
 end
 
 function PANEL:SetFont(font)
 	self.Font = font
-end 
+end
 function PANEL:GetFont()
 	return self.Font
 end
 
 function PANEL:SetColor(color)
 	self.Color = color
-end 
+end
 function PANEL:GetColor()
 	return self.Color
 end
 
 function PANEL:SetFixed(fixed)
 	self.FixedHieght = fixed
-end 
+end
 function PANEL:GetFixed()
 	return self.FixedHieght
 end

@@ -63,7 +63,7 @@ if SERVER then
 			end
 			local fxdSparks = EffectData()
 			fxdSparks:SetOrigin(self:GetPos() + Vector(0,0,70))
-			util.Effect("cball_explode", fxdSparks)  
+			util.Effect("cball_explode", fxdSparks)
 			return true
 		end)
 	end

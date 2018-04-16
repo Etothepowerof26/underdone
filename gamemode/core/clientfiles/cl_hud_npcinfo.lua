@@ -15,7 +15,7 @@ local function DrawNameText(entNPC, posNPCPos, boolFriendly)
 	if intLevel > plylevel then clrDrawColor = clrRed end
 	if boolFriendly then clrDrawColor = clrWhite end
 	local strTitle = tblNPCTable.Title or ""
-	if tblNPCTable.Shop then 
+	if tblNPCTable.Shop then
 		local tbl = ShopTable(tblNPCTable.Shop)
 		if tbl then
 			strTitle = tbl.PrintName

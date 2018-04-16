@@ -3,10 +3,10 @@ function GM:PlayerCanHearPlayersVoice(pListener, pSpeaker)
 	local intChatDistance = 1000
 	if pSpeaker:GetNWBool("SquadChat") or pListener:GetNWBool("SquadChat") then
 		if pListener:IsInSquad(pSpeaker) or pSpeaker:IsInSquad(pListener) then
-			local intChatDistance = 10000
+			intChatDistance = 10000
 		else
-			local intChatDistance = 1000
-		end 
+			intChatDistance = 1000
+		end
 	end
 	if pListener:GetPos():Distance(pSpeaker:GetPos()) >= intChatDistance then return false end --Too Far
 	return true --All good :)

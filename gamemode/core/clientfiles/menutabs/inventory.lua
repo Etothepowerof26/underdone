@@ -23,7 +23,7 @@ function PANEL:Init()
 	end
 	GAMEMODE:AddHoverObject(self.inventorylist)
 	GAMEMODE:AddHoverObject(self.inventorylist.pnlCanvas, self.inventorylist)
-	
+
 	self.WeightBar = CreateGenericWeightBar(self, LocalPlayer().Weight or 0, LocalPlayer():GetMaxWeight())
 	self.LibraryButton = CreateGenericImageButton(self, "gui/book", "Library", function()
 		GAMEMODE.ActiveMenu = nil
@@ -61,7 +61,7 @@ function PANEL:Init()
 		end
 		GAMEMODE.ActiveMenu:Open()
 	end)
-	
+
 	self.Paperdoll = vgui.Create("FPaperDoll", self)
 	self.Paperdoll.Paint = function()
 		local tblPaintPanle = jdraw.NewPanel()
@@ -73,28 +73,28 @@ function PANEL:Init()
 
 	self.StatsDisplay = CreateGenericList(self, 3, false, false)
 	self.StatsDisplay:SetSpacing(0)
-	
+
 	self.AmmoDisplay = CreateGenericList(self, 3, false, false)
 	self.AmmoDisplay:SetSpacing(0)
-	
+
 	self:LoadInventory()
 end
 
 function PANEL:PerformLayout()
 	self.inventorylist:SetPos(0, 20)
 	self.inventorylist:SetSize(((self.ItemIconSize + self.ItemIconPadding) * self.ItemRow) + self.ItemIconPadding, self:GetTall() - 20)
-	
+
 	self.WeightBar:SetPos(0, 0)
 	self.WeightBar:SetSize(self.inventorylist:GetWide() - self.LibraryButton:GetWide() - 5, 15)
 	self.WeightBar:Update(LocalPlayer().Weight or 0)
 	self.LibraryButton:SetPos(self.WeightBar:GetWide() + 5, 0)
-	
+
 	self.Paperdoll:SetPos(self.inventorylist:GetWide() + 5, 0)
 	self.Paperdoll:SetSize(self:GetWide() - (self.inventorylist:GetWide() + 5), self:GetTall() - 85)
-	
+
 	self.StatsDisplay:SetPos(self.inventorylist:GetWide() + 5, self.Paperdoll:GetTall() + 5)
 	self.StatsDisplay:SetSize((self.Paperdoll:GetWide() * 0.60) - 5, self:GetTall() - self.Paperdoll:GetTall() - 5)
-	
+
 	self.AmmoDisplay:SetPos((self.inventorylist:GetWide() + 5) + self.StatsDisplay:GetWide() + 5, self.Paperdoll:GetTall() + 5)
 	self.AmmoDisplay:SetSize((self.Paperdoll:GetWide() - self.StatsDisplay:GetWide()) - 5, self:GetTall() - self.Paperdoll:GetTall() - 5)
 end
@@ -109,7 +109,7 @@ function PANEL:LoadInventory(boolTemp)
 			self:AddItem(item, amount)
 		end
 	end
-	
+
 	for name, slotTable in pairs(GAMEMODE.DataBase.Slots) do
 		if self.Paperdoll.Slots[slotTable.Name] then
 			if LocalPlayer().Data.Paperdoll[slotTable.Name] then
@@ -119,7 +119,7 @@ function PANEL:LoadInventory(boolTemp)
 			end
 		end
 	end
-	
+
 	self.StatsDisplay:Clear()
 	local tblAddTable = table.Copy(GAMEMODE.DataBase.Stats)
 	tblAddTable = table.ClearKeys(tblAddTable)
@@ -136,7 +136,7 @@ function PANEL:LoadInventory(boolTemp)
 			self.StatsDisplay:AddItem(lblNewStat)
 		end
 	end
-	
+
 	self:ReloadAmmoDisplay()
 	self:PerformLayout()
 end

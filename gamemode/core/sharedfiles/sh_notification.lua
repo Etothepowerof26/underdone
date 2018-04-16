@@ -4,7 +4,7 @@ if CLIENT then
 	local intStartPostion = ScrH() - 100
 	local intSpacing = 5
 	local intHieght = 20
-	
+
 	local function DrawNotifications()
 		local yOffset = intStartPostion
 		for _, strNocification in pairs(tblNotifications) do
@@ -32,7 +32,7 @@ if SERVER then
 	local Player = FindMetaTable("Player")
 	function Player:CreateNotification(strMessage)
 		if IsValid(self) then
-			self:ConCommand("UD_AddNotification " .. strMessage) 
+			self:ConCommand("UD_AddNotification " .. strMessage)
 		end
 	end
 end

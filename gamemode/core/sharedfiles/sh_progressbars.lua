@@ -5,7 +5,7 @@ if CLIENT then
 	local intStartingX = (ScrW() / 2) - (intBarWidth / 2)
 	local intStartingY = ScrH() - intBarHieght - 100
 	local intSpacing = 5
-	
+
 	local function DrawProgressBars()
 		local intRunningHieght = intStartingY
 		for strNocification, tblTimeTable in pairs(tblProgressBars or {}) do
@@ -35,7 +35,7 @@ if SERVER then
 	local Player = FindMetaTable("Player")
 	function Player:CreateProgressBar(strMessage, intTime)
 		if IsValid(self) then
-			self:ConCommand("UD_AddProgressBar " .. string.gsub(strMessage, " ", "_") .. " " .. intTime) 
+			self:ConCommand("UD_AddProgressBar " .. string.gsub(strMessage, " ", "_") .. " " .. intTime)
 		end
 	end
 end

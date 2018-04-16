@@ -30,7 +30,7 @@ function Player:AddQuest(strQuest, tblInfo)
 end
 
 function Player:QuestItem(strItem)
-	local tblItemTable = ItemTable(strItem)  
+	local tblItemTable = ItemTable(strItem)
 	if not tblItemTable.QuestItem or self:GetQuest(tblItemTable.QuestItem) then
 		if not self:HasCompletedQuest(tblItemTable.QuestItem) then
 			return true
@@ -122,7 +122,7 @@ if SERVER then
 		end
 	end
 	hook.Add("OnNPCKilled", "KillNPC", KillNPC)
-	
+
 	function Player:TurnInQuest(strQuest)
 		if not IsValid(self) then return end
 		if not self.UseTarget.Quest or self.UseTarget:GetPos():Distance(self:GetPos()) > 100 then return end
@@ -138,7 +138,7 @@ if SERVER then
 		end
 	end
 	concommand.Add("UD_TurnInQuest", function(ply, command, args) ply:TurnInQuest(args[1]) end)
-	
+
 	function Player:AcceptQuest(strQuest)
 		if not IsValid(self) then return end
 		if not self.UseTarget.Quest or self.UseTarget:GetPos():Distance(self:GetPos()) > 100 then return end

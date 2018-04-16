@@ -15,7 +15,7 @@ local function TickDistanceRetreat()
 						end)
 					end
 				end
-				if npc:GetPos():Distance(npc.Position) > (tblNPCTable.DistanceRetreat * 2) then  
+				if npc:GetPos():Distance(npc.Position) > (tblNPCTable.DistanceRetreat * 2) then
 					npc:SetPos(npc.Position)
 				end
 				if npc.HasTask then
@@ -47,8 +47,8 @@ function GM:OnNPCKilled(npcTarget, entKiller, weapon)
 	if entKiller.EntityDamageData then
 		if entKiller.EntityDamageData[npcTarget] then
 			for _, ply in pairs(player.GetAll()) do
-				if ply.EntityDamageData then  
-					if ply.EntityDamageData[npcTarget] then  
+				if ply.EntityDamageData then
+					if ply.EntityDamageData[npcTarget] then
 						if ply.EntityDamageData[npcTarget] > entKiller.EntityDamageData[npcTarget] then
 							entKiller = ply
 						end
@@ -58,8 +58,8 @@ function GM:OnNPCKilled(npcTarget, entKiller, weapon)
 		end
 	end
 	for _, ply in pairs(player.GetAll()) do
-		if ply.EntityDamageData then  
-			if ply.EntityDamageData[npcTarget] then  
+		if ply.EntityDamageData then
+			if ply.EntityDamageData[npcTarget] then
 				ply.EntityDamageData[npcTarget] = nil
 			end
 		end
@@ -110,7 +110,7 @@ local function NPCAdjustDamage(entVictim, entInflictor, entAttacker, intAmount, 
 	local boolInvincible = tblNPCTable.Invincible or entAttacker.Race == tblNPCTable.Race
 	if entAttacker:IsPlayer() and not boolInvincible then
 		local clrDisplayColor = "white"
-		tblDamageInfo:SetDamage(math.Round(tblDamageInfo:GetDamage() * (1 / entVictim:GetNWInt("level"))))    
+		tblDamageInfo:SetDamage(math.Round(tblDamageInfo:GetDamage() * (1 / entVictim:GetNWInt("level"))))
 		if math.random(1, math.Round(20 / (1 + (entAttacker:GetStat("stat_luck") / 50)))) == 1 then
 			tblDamageInfo:SetDamage(math.Round(tblDamageInfo:GetDamage() * 2))
 			entAttacker:CreateIndacator("Crit!", tblDamageInfo:GetDamagePosition(), "blue", true)

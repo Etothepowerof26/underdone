@@ -25,9 +25,9 @@ function Player:DropItem(strItem, intAmount)
 	end
 	return false
 end
-concommand.Add("UD_DropItem", function(ply, command, args) 
+concommand.Add("UD_DropItem", function(ply, command, args)
 	local amount = math.Clamp(tonumber(args[2]), 1, ply.Data.Inventory[args[1]]) or 1
-	ply:DropItem(args[1], amount) 
+	ply:DropItem(args[1], amount)
 end)
 
 function Player:GiveItem(strItem, intAmount, plyTarget)
@@ -37,4 +37,3 @@ function Player:GiveItem(strItem, intAmount, plyTarget)
 	plyTarget:CreateNotification(self:Nick() .. " Gave you " .. tostring(math.Round(intAmount)) .. " " .. tblItemTable.PrintName)
 end
 concommand.Add("UD_GiveItem", function(ply, command, args) ply:GiveItem(args[1], args[2], player.GetByID(tonumber(args[3]))) end)
-

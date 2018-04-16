@@ -28,16 +28,16 @@ function GM:HUDPaint()
 	self.PlayerBox:SetBoarder(1, clrDrakGray)
 	self:DrawSkillPoints()
 	jdraw.DrawPanel(self.PlayerBox)
-	
+
 	self:DrawHealthBar()
 	self:DrawLevelBar()
-	if not LocalPlayer():IsMelee() and IsValid(LocalPlayer():GetActiveWeapon()) then self:DrawAmmoBar() end    
-	
+	if not LocalPlayer():IsMelee() and IsValid(LocalPlayer():GetActiveWeapon()) then self:DrawAmmoBar() end
+
 	self:DrawQuestToDoList()
 	local intYOffset = self.PlayerBox.Position.Y
 	if LocalPlayer():GetNWInt("SkillPoints") > 0 then intYOffset = intYOffset - 25 end
 	self:DrawSquadMembers(10, -1)
-	
+
 	if GAMEMODE.ConVarShowCrossHair:GetBool() then
 		local intSize = 4
 		local intLines = GAMEMODE.ConVarCrossHairProngs:GetInt()
@@ -88,10 +88,10 @@ function GM:DrawQuestToDoList()
 				if not NPCTable(strNPC) then return end
 				if intAmount < tblQuestTable.Kill[strNPC] then
 					draw.SimpleTextOutlined("Kill " .. NPCTable(strNPC).PrintName .. ": " .. intAmount .. "/" .. tblQuestTable.Kill[strNPC], "Trebuchet18", intXOffset, intYOffset, clrWhite, 0, 1, 1, clrDrakGray)
-					intYOffset = intYOffset + intPadding    
+					intYOffset = intYOffset + intPadding
 				end
 				for _, NPC in pairs(ents.FindByClass("npc_"..strNPC)) do
-					if not NPC.HasWayPoint and not LocalPlayer():CanTurnInQuest(strQuest) then  
+					if not NPC.HasWayPoint and not LocalPlayer():CanTurnInQuest(strQuest) then
 						NPC.HasWayPoint = true
 						local vPoint = NPC:GetPos()
 						WayPoint = EffectData()
@@ -111,7 +111,7 @@ function GM:DrawQuestToDoList()
 					intYOffset = intYOffset + intPadding
 					for _,prop in pairs(ents.FindByClass("prop_physics")) do
 						if IsValid(prop) and tblItemTable.Model == prop:GetModel() then
-							if not prop.HasWayPoint and not LocalPlayer():CanTurnInQuest(strQuest) then  
+							if not prop.HasWayPoint and not LocalPlayer():CanTurnInQuest(strQuest) then
 								prop.HasWayPoint = true
 								local vPoint = prop:GetPos()
 								WayPoint = EffectData()

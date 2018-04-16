@@ -1,7 +1,7 @@
 local function DrawItemInfo()
-	for _, ent in pairs(ents.FindByClass("prop_*")) do 
+	for _, ent in pairs(ents.FindByClass("prop_*")) do
 		//if IsValid(ent) then
-			//if ent:GetModel() == "models/props_c17/oildrum001.mdl" then  
+			//if ent:GetModel() == "models/props_c17/oildrum001.mdl" then
 			//end
 		//end
 		if IsValid(ent) and ent:GetNWString("PrintName") and ent:GetNWInt("Amount") > 0 then
@@ -13,7 +13,7 @@ local function DrawItemInfo()
 					draw.SimpleTextOutlined(strText, "Default", posENTpos.x, posENTpos.y - 10, clrWhite, 1, 1, 1, clrDrakGray)
 					ent:SetColor(255, 255, 255, 255)
 				else
-					ent:SetColor(255, 255, 255, 0) 
+					ent:SetColor(255, 255, 255, 0)
 				end
 			end
 			if ent:GetModel() == "models/props/de_inferno/clayoven.mdl" then
@@ -23,6 +23,6 @@ local function DrawItemInfo()
 				end
 			end
 		end
-	end  
+	end
 end
 hook.Add("HUDPaint", "DrawItemInfo", DrawItemInfo)

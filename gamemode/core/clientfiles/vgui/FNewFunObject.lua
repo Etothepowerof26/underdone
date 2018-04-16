@@ -1,10 +1,10 @@
 --[[
-	+oooooo+-`    `:oyyys+-`    +oo.       /oo-   .oo+-  ooo+`   `ooo+  
-	NMMhyhmMMm-  omMNyosdMMd:   NMM:       hMM+ `oNMd:  `MMMMy`  yMMMN  
-	NMM:  .NMMo /MMN:    sMMN`  NMM:       hMMo/dMm/`   `MMMmMs`oMmMMN  
-	NMMhyhmMNh. yMMm     -MMM:  NMM:       hMMmNMMo     `MMM:mMhMd/MMN  
-	NMMyoo+/.   /MMN:    sMMN`  NMM:       hMMy:dMMh-   `MMM`:NMN.:MMN  
-	NMM:         +NMNyosdMMd:   NMMdyyyyy. hMM+ `+NMNo` `MMM` ... :MMN  
+	+oooooo+-`    `:oyyys+-`    +oo.       /oo-   .oo+-  ooo+`   `ooo+
+	NMMhyhmMMm-  omMNyosdMMd:   NMM:       hMM+ `oNMd:  `MMMMy`  yMMMN
+	NMM:  .NMMo /MMN:    sMMN`  NMM:       hMMo/dMm/`   `MMMmMs`oMmMMN
+	NMMhyhmMNh. yMMm     -MMM:  NMM:       hMMmNMMo     `MMM:mMhMd/MMN
+	NMMyoo+/.   /MMN:    sMMN`  NMM:       hMMy:dMMh-   `MMM`:NMN.:MMN
+	NMM:         +NMNyosdMMd:   NMMdyyyyy. hMM+ `+NMNo` `MMM` ... :MMN
 	+oo.          `:oyyys+-`    +oooooooo` /oo-   .ooo/  ooo`     .oo+  2010
 ]]
 
@@ -37,7 +37,7 @@ function PANEL:Paint()
 			intNewX = intNewX + (intCursorX - intNewX)
 			intNewY = intNewY + (intCursorY - intNewY)
 		end
-		
+
 		if intLastX and intLastY then
 			surface.SetDrawColor(self.Color.r, self.Color.g, self.Color.b, self.Color.a)
 			surface.DrawLine(intLastX, intLastY, intNewX, intNewY)
@@ -45,7 +45,7 @@ function PANEL:Paint()
 		intLastX, intLastY = intNewX, intNewY
 	end]]
 	--Otehr thing
-	
+
 	local intWidth, intHieght = self:GetWide(), self:GetTall()
 	surface.SetDrawColor(self.Color.r, self.Color.g, self.Color.b, self.Color.a)
 	--Draw the ground
@@ -94,6 +94,6 @@ local function FunExample()
 				CreateBranches(tblBranchTable)
 			end
 		end
-		
+
 end
 concommand.Add("FunExample", FunExample)

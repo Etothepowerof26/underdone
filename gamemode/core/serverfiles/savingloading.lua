@@ -1,4 +1,4 @@
-wlocal Player = FindMetaTable("Player")
+local Player = FindMetaTable("Player")
 
 function Player:NewGame()
 	self:SetNWInt("exp", 0)

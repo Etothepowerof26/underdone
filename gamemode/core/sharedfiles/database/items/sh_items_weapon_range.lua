@@ -1,21 +1,21 @@
 local function AddModel(tblAddTable, strModel, vecPostion, angAngle, clrColor, strMaterial, vecScale)
-  tblAddTable.Model = tblAddTable.Model or {}
-  if type(tblAddTable.Model) ~= "table" then tblAddTable.Model = {} end
-  table.insert(tblAddTable.Model, {Model = strModel, Position = vecPostion, Angle = angAngle, Color = clrColor, Material = strMaterial, Scale = vecScale})
-  return tblAddTable
+	tblAddTable.Model = tblAddTable.Model or {}
+	if type(tblAddTable.Model) ~= "table" then tblAddTable.Model = {} end
+	table.insert(tblAddTable.Model, {Model = strModel, Position = vecPostion, Angle = angAngle, Color = clrColor, Material = strMaterial, Scale = vecScale})
+	return tblAddTable
 end
 local function AddStats(tblAddTable, intPower, intAccuracy, intFireRate, intClipSize, intNumOfBullets)
-  tblAddTable.Power = intPower
-  tblAddTable.Accuracy = intAccuracy
-  tblAddTable.FireRate = intFireRate
-  tblAddTable.ClipSize = intClipSize
-  tblAddTable.NumOfBullets = intNumOfBullets or 1
-  return tblAddTable
+	tblAddTable.Power = intPower
+	tblAddTable.Accuracy = intAccuracy
+	tblAddTable.FireRate = intFireRate
+	tblAddTable.ClipSize = intClipSize
+	tblAddTable.NumOfBullets = intNumOfBullets or 1
+	return tblAddTable
 end
 local function AddSound(tblAddTable, strShootSound, strReloadSound)
-  tblAddTable.Sound = strShootSound
-  tblAddTable.ReloadSound = strReloadSound
-  return tblAddTable
+	tblAddTable.Sound = strShootSound
+	tblAddTable.ReloadSound = strReloadSound
+	return tblAddTable
 end
 
 local Item = QuickCreateItemTable(BaseWeapon, "weapon_ranged_plasma", "Plasma Rifle", "Stolen from another game!!", "icons/weapon_pistol")
@@ -203,16 +203,16 @@ Item.SellPrice = 4200
 Item.HoldType = "crossbow"
 Item.AmmoType = "SniperRound"
 function Item:SecondaryCallBack(ply)
-  if (not Zoomed) then
-    Zoomed = true
-    if SERVER then
-      ply:SetFOV( 45, 0.3 )
-    end
-  else
-    Zoomed = false
-    if SERVER then
-      ply:SetFOV( 0, 0.3 )
-    end
-  end
+	if (not Zoomed) then
+		Zoomed = true
+		if SERVER then
+			ply:SetFOV( 45, 0.3 )
+		end
+	else
+		Zoomed = false
+		if SERVER then
+			ply:SetFOV( 0, 0.3 )
+		end
+	end
 end
 Register.Item(Item)

@@ -1,7 +1,7 @@
 local function AddBuff(tblAddTable, strBuff, intAmount)
-  tblAddTable.Buffs = tblAddTable.Buffs or {}
-  tblAddTable.Buffs[strBuff] = intAmount
-  return tblAddTable
+	tblAddTable.Buffs = tblAddTable.Buffs or {}
+	tblAddTable.Buffs[strBuff] = intAmount
+	return tblAddTable
 end
 
 local tblEquipmentSet = {}

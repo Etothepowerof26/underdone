@@ -1,12 +1,12 @@
 local function AddHealth(tblAddTable, intAmount, intTime)
-  tblAddTable.AddedHealth = intAmount
-  tblAddTable.AddTime = intTime
-  return tblAddTable
+	tblAddTable.AddedHealth = intAmount
+	tblAddTable.AddTime = intTime
+	return tblAddTable
 end
 local function AddAmmo(tblAddTable, intAmount, strType)
-  tblAddTable.AmmoAmount = intAmount
-  tblAddTable.AmmoType = strType
-  return tblAddTable
+	tblAddTable.AmmoAmount = intAmount
+	tblAddTable.AmmoType = strType
+	return tblAddTable
 end
 
 local Item = QuickCreateItemTable(BaseFood, "item_canspoilingmeat", "Can of Spoiling Meat", "Restores your health by 10 over 12 Seconds", "icons/junk_metalcan1")

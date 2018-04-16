@@ -39,23 +39,23 @@ Item.SellPrice = 40
 Item.FireTime = 50
 Item.Weight = 1
 function Item:Use(usr, itemtable)
-  if not IsValid(usr) or usr:Health() <= 0 then return end
-  local Wood = ents.Create("prop_physics")
-  Wood:SetModel(itemtable.Model)
-  Wood:SetPos(usr:EyePos() + (usr:GetAimVector() * 50))
-  Wood:Spawn()
-  Wood:DropToFloor()
-  Wood:Ignite(itemtable.FireTime,0)
-  Wood:PhysicsInit(SOLID_VPHYSICS)
-  Wood:SetMoveType(MOVETYPE_NONE)
-  local Fire = ents.Create("env_fire")
-  Fire:SetParent(Wood)
-  Fire:SetKeyValue("health", itemtable.FireTime)
-  Fire:SetKeyValue("firesize", "0.1")
-  Fire:SetPos(Wood:GetPos())
-  Fire:Spawn()
-  timer.Simple(itemtable.FireTime, function() Wood:Remove() Fire:Remove() end)
-  usr:AddItem(itemtable.Name, -1)
+	if not IsValid(usr) or usr:Health() <= 0 then return end
+	local Wood = ents.Create("prop_physics")
+	Wood:SetModel(itemtable.Model)
+	Wood:SetPos(usr:EyePos() + (usr:GetAimVector() * 50))
+	Wood:Spawn()
+	Wood:DropToFloor()
+	Wood:Ignite(itemtable.FireTime,0)
+	Wood:PhysicsInit(SOLID_VPHYSICS)
+	Wood:SetMoveType(MOVETYPE_NONE)
+	local Fire = ents.Create("env_fire")
+	Fire:SetParent(Wood)
+	Fire:SetKeyValue("health", itemtable.FireTime)
+	Fire:SetKeyValue("firesize", "0.1")
+	Fire:SetPos(Wood:GetPos())
+	Fire:Spawn()
+	timer.Simple(itemtable.FireTime, function() Wood:Remove() Fire:Remove() end)
+	usr:AddItem(itemtable.Name, -1)
 end
 Register.Item(Item)
 
@@ -131,24 +131,24 @@ Item.Stackable = true
 Item.SellPrice = 40
 Item.Weight = 1
 function Item:Use(usr, itemtable)
-  if not IsValid(usr) or usr:Health() <= 0 then return end
-  if (usr.NextNade or CurTime()) > CurTime() then return end
-  usr:RestartGesture(ACT_ITEM_THROW)
-  local entNade = ents.Create("npc_grenade_frag")
-  timer.Simple(1, function()
-    if IsValid(entNade) and IsValid(usr) then
-      local vecNadePos = usr:EyePos() + (usr:GetAimVector() * 50)
-      local intNadeDur = 3
-      entNade:SetOwner(usr)
-      entNade:Fire("SetTimer", intNadeDur)
-      entNade.OverrideDamge = 50
-      entNade:SetPos(vecNadePos)
-      entNade:SetAngles(usr:EyeAngles())
-      entNade:Spawn()
-      entNade:GetPhysicsObject():ApplyForceCenter(usr:GetAimVector():GetNormalized() * 600)
-    end
-  end)
-  usr.NextNade = CurTime() + 2
-  usr:AddItem(itemtable.Name, -1)
+	if not IsValid(usr) or usr:Health() <= 0 then return end
+	if (usr.NextNade or CurTime()) > CurTime() then return end
+	usr:RestartGesture(ACT_ITEM_THROW)
+	local entNade = ents.Create("npc_grenade_frag")
+	timer.Simple(1, function()
+		if IsValid(entNade) and IsValid(usr) then
+			local vecNadePos = usr:EyePos() + (usr:GetAimVector() * 50)
+			local intNadeDur = 3
+			entNade:SetOwner(usr)
+			entNade:Fire("SetTimer", intNadeDur)
+			entNade.OverrideDamge = 50
+			entNade:SetPos(vecNadePos)
+			entNade:SetAngles(usr:EyeAngles())
+			entNade:Spawn()
+			entNade:GetPhysicsObject():ApplyForceCenter(usr:GetAimVector():GetNormalized() * 600)
+		end
+	end)
+	usr.NextNade = CurTime() + 2
+	usr:AddItem(itemtable.Name, -1)
 end
 Register.Item(Item)

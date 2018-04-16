@@ -41,9 +41,9 @@ function EquipmentSetTable(strEquipmentSet) return GAMEMODE.DataBase.EquipmentSe
 GM.DataBase.Stats = {}
 local intStatIndex = 1
 function Register.Stat(tblItem)
-  GM.DataBase.Stats[tblItem.Name] = tblItem
-  GM.DataBase.Stats[tblItem.Name].Index = intStatIndex
-  intStatIndex = intStatIndex + 1
+	GM.DataBase.Stats[tblItem.Name] = tblItem
+	GM.DataBase.Stats[tblItem.Name].Index = intStatIndex
+	intStatIndex = intStatIndex + 1
 end
 function StatTable(strStat) return GAMEMODE.DataBase.Stats[strStat] end
 
@@ -76,7 +76,7 @@ function Register.Event(tblEvent) GM.DataBase.Events[tblEvent.Name] = tblEvent e
 function EventTable(strEvent) return GAMEMODE.DataBase.Events[strEvent] end
 
 function AddPlayerModel(strModel)
-  table.insert(GM.PlayerModel, {strModel})
+	table.insert(GM.PlayerModel, {strModel})
 end
 
 GM.PlayerModel = {}

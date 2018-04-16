@@ -10,12 +10,12 @@ Skill.Desc[3] = "Increase Dexterity by 7"
 Skill.Tier = 1
 Skill.Levels = 3
 function Skill:OnSet(plyPlayer, intSkillLevel, intOldSkillLevel)
-  local tblStatTable = {}
-  tblStatTable[0] = 0
-  tblStatTable[1] = 2
-  tblStatTable[2] = 4
-  tblStatTable[3] = 7
-  plyPlayer:AddStat("stat_dexterity", tblStatTable[intSkillLevel] - tblStatTable[intOldSkillLevel])
+	local tblStatTable = {}
+	tblStatTable[0] = 0
+	tblStatTable[1] = 2
+	tblStatTable[2] = 4
+	tblStatTable[3] = 7
+	plyPlayer:AddStat("stat_dexterity", tblStatTable[intSkillLevel] - tblStatTable[intOldSkillLevel])
 end
 Register.Skill(Skill)
 
@@ -31,12 +31,12 @@ Skill.Desc[3] = "Increase Strength by 5"
 Skill.Tier = 1
 Skill.Levels = 3
 function Skill:OnSet(plyPlayer, intSkillLevel, intOldSkillLevel)
-  local tblStatTable = {}
-  tblStatTable[0] = 0
-  tblStatTable[1] = 1
-  tblStatTable[2] = 3
-  tblStatTable[3] = 5
-  plyPlayer:AddStat("stat_strength", tblStatTable[intSkillLevel] - tblStatTable[intOldSkillLevel])
+	local tblStatTable = {}
+	tblStatTable[0] = 0
+	tblStatTable[1] = 1
+	tblStatTable[2] = 3
+	tblStatTable[3] = 5
+	plyPlayer:AddStat("stat_strength", tblStatTable[intSkillLevel] - tblStatTable[intOldSkillLevel])
 end
 Register.Skill(Skill)
 
@@ -51,11 +51,11 @@ Skill.Desc[2] = "Increase Agility by 2"
 Skill.Tier = 1
 Skill.Levels = 2
 function Skill:OnSet(plyPlayer, intSkillLevel, intOldSkillLevel)
-  local tblStatTable = {}
-  tblStatTable[0] = 0
-  tblStatTable[1] = 1
-  tblStatTable[2] = 2
-  plyPlayer:AddStat("stat_agility", tblStatTable[intSkillLevel] - tblStatTable[intOldSkillLevel])
+	local tblStatTable = {}
+	tblStatTable[0] = 0
+	tblStatTable[1] = 1
+	tblStatTable[2] = 2
+	plyPlayer:AddStat("stat_agility", tblStatTable[intSkillLevel] - tblStatTable[intOldSkillLevel])
 end
 Register.Skill(Skill)
 
@@ -70,10 +70,10 @@ Skill.Tier = 1
 Skill.Levels = 1
 Skill.Hooks = {}
 Skill.Hooks["food_mod"] = function(plyPlayer, intSkillLevel, intHealthToAdd)
-  if intSkillLevel > 0 then
-    intHealthToAdd = intHealthToAdd + (intHealthToAdd * (15 / 100))
-  end
-  return intHealthToAdd
+	if intSkillLevel > 0 then
+		intHealthToAdd = intHealthToAdd + (intHealthToAdd * (15 / 100))
+	end
+	return intHealthToAdd
 end
 Register.Skill(Skill)
 
@@ -89,12 +89,12 @@ Skill.Tier = 1
 Skill.Levels = 2
 Skill.Hooks = {}
 Skill.Hooks["price_mod"] = function(plyPlayer, intSkillLevel, intPrice)
-  if intSkillLevel > 0 then
-    local intDiscount = 3
-    if intSkillLevel == 2 then intDiscount = 5 end
-    intPrice = intPrice - (intPrice * (intDiscount / 100))
-  end
-  return intPrice
+	if intSkillLevel > 0 then
+		local intDiscount = 3
+		if intSkillLevel == 2 then intDiscount = 5 end
+		intPrice = intPrice - (intPrice * (intDiscount / 100))
+	end
+	return intPrice
 end
 Register.Skill(Skill)
 
@@ -110,11 +110,11 @@ Skill.Tier = 1
 Skill.Levels = 2
 Skill.Hooks = {}
 Skill.Hooks["resouce_mod"] = function(plyPlayer, intSkillLevel, strItem, intMaxAmount)
-  if intSkillLevel > 0 then
-    local intAddMaxAmount = 1
-    if intSkillLevel == 2 then intAddMaxAmount = 2 end
-    intMaxAmount = intMaxAmount + intAddMaxAmount
-  end
-  return strItem, intMaxAmount
+	if intSkillLevel > 0 then
+		local intAddMaxAmount = 1
+		if intSkillLevel == 2 then intAddMaxAmount = 2 end
+		intMaxAmount = intMaxAmount + intAddMaxAmount
+	end
+	return strItem, intMaxAmount
 end
 Register.Skill(Skill)

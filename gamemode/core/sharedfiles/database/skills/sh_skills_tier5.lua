@@ -10,20 +10,20 @@ Skill.Desc[1] = "Every 12 seconds you and your squadmate's who are within a 500 
 Skill.Tier = 5
 Skill.Levels = 1
 function Skill:OnSet(plyPlayer, intSkillLevel, intOldSkillLevel)
-  local intPercent = intSkillLevel
-  if intPercent <= 0 then return end
-  if #(plyPlayer.Squad or {}) < 1 then return end
-  local function fncDoSquadHealth(plyPlayer)
-    if intPercent > 0 and IsValid(plyPlayer) and plyPlayer:Alive() then
-      for _, plySquad in pairs(plyPlayer.Squad) do
-        if IsValid(plySquad) and plyPlayer:GetPos():Distance(plySquad:GetPos()) <= 500 then
-          local intCurrentHealth = plySquad:Health()
-          plySquad:SetHealth(math.Clamp(intCurrentHealth + (plySquad:GetMaximumHealth() * (intPercent / 100)), 0, plySquad:GetMaximumHealth()))
-        end
-      end
-    end
-  end
-  timer.Create(plyPlayer:EntIndex(), 12, 0, function() fncDoSquadHealth(plyPlayer) end)
+	local intPercent = intSkillLevel
+	if intPercent <= 0 then return end
+	if #(plyPlayer.Squad or {}) < 1 then return end
+	local function fncDoSquadHealth(plyPlayer)
+		if intPercent > 0 and IsValid(plyPlayer) and plyPlayer:Alive() then
+			for _, plySquad in pairs(plyPlayer.Squad) do
+				if IsValid(plySquad) and plyPlayer:GetPos():Distance(plySquad:GetPos()) <= 500 then
+					local intCurrentHealth = plySquad:Health()
+					plySquad:SetHealth(math.Clamp(intCurrentHealth + (plySquad:GetMaximumHealth() * (intPercent / 100)), 0, plySquad:GetMaximumHealth()))
+				end
+			end
+		end
+	end
+	timer.Create(plyPlayer:EntIndex(), 12, 0, function() fncDoSquadHealth(plyPlayer) end)
 end
 Register.Skill(Skill)
 
@@ -41,12 +41,12 @@ Skill.Desc[3] = "Increase Strength by 12"
 Skill.Tier = 5
 Skill.Levels = 3
 function Skill:OnSet(plyPlayer, intSkillLevel, intOldSkillLevel)
-  local tblStatTable = {}
-  tblStatTable[0] = 0
-  tblStatTable[1] = 9
-  tblStatTable[2] = 10
-  tblStatTable[3] = 12
-  plyPlayer:AddStat("stat_strength", tblStatTable[intSkillLevel] - tblStatTable[intOldSkillLevel])
+	local tblStatTable = {}
+	tblStatTable[0] = 0
+	tblStatTable[1] = 9
+	tblStatTable[2] = 10
+	tblStatTable[3] = 12
+	plyPlayer:AddStat("stat_strength", tblStatTable[intSkillLevel] - tblStatTable[intOldSkillLevel])
 end
 Register.Skill(Skill)
 
@@ -60,11 +60,9 @@ Skill.Desc[1] = "Increase Luck by 5"
 Skill.Tier = 5
 Skill.Levels = 1
 function Skill:OnSet(plyPlayer, intSkillLevel, intOldSkillLevel)
-  local tblStatTable = {}
-  tblStatTable[0] = 0
-  tblStatTable[1] = 5
-  plyPlayer:AddStat("stat_luck", tblStatTable[intSkillLevel] - tblStatTable[intOldSkillLevel])
+	local tblStatTable = {}
+	tblStatTable[0] = 0
+	tblStatTable[1] = 5
+	plyPlayer:AddStat("stat_luck", tblStatTable[intSkillLevel] - tblStatTable[intOldSkillLevel])
 end
 Register.Skill(Skill)
-
-

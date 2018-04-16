@@ -1,28 +1,28 @@
 local function QuickNPC(strName, strPrintName, strSpawnName, strRace, intDistance, strModel)
-  local NPC = {}
-  NPC.Name = strName
-  NPC.PrintName = strPrintName
-  NPC.SpawnName = strSpawnName
-  NPC.Race = strRace
-  NPC.DistanceRetreat = intDistance
-  NPC.Model = strModel
-  return NPC
+	local NPC = {}
+	NPC.Name = strName
+	NPC.PrintName = strPrintName
+	NPC.SpawnName = strSpawnName
+	NPC.Race = strRace
+	NPC.DistanceRetreat = intDistance
+	NPC.Model = strModel
+	return NPC
 end
 local function AddBool(Table, strFrozen, strInvincible, strIdle)
-    Table.Frozen = strFrozen
-    Table.Invincible = strInvincible
-    Table.Idle = strIdle
-  return Table
+		Table.Frozen = strFrozen
+		Table.Invincible = strInvincible
+		Table.Idle = strIdle
+	return Table
 end
 local function AddMultiplier(Table, strHealth, strDamage)
-  Table.HealthPerLevel = strHealth
-  Table.DamagePerLevel = strDamage
-  return Table
+	Table.HealthPerLevel = strHealth
+	Table.DamagePerLevel = strDamage
+	return Table
 end
 local function AddDrop(Table, strName, strChance, strMin, strMax,strDefaultChance)
-  Table.Drops = Table.Drops or {}
-  Table.Drops[strName] = {Chance = strChance, Min = strMin, Max = strMax}
-  return Table
+	Table.Drops = Table.Drops or {}
+	Table.Drops[strName] = {Chance = strChance, Min = strMin, Max = strMax}
+	return Table
 end
 
 local NPC = QuickNPC("rebel_smg", "Rebel Guard", "npc_combine_s", "human", 50, "models/Humans/Group03/Male_02.mdl")
@@ -95,16 +95,16 @@ Register.NPC(NPC)
 
 local NPC = QuickNPC("quest_Adam", "Adam", "npc_breen", "human", nil, "models/Humans/Group03/Male_02.mdl")
 NPC = AddBool(NPC, false, true, true)
-NPC.Quest = {"quest_killzombies", "quest_monkeybusiness", "quest_killantlion", 
-"quest_zombieblood", "quest_beer", "quest_killelite", "quest_killzombine", 
+NPC.Quest = {"quest_killzombies", "quest_monkeybusiness", "quest_killantlion",
+"quest_zombieblood", "quest_beer", "quest_killelite", "quest_killzombine",
 "quest_cooking"}
 NPC.DeathDistance = 14
 Register.NPC(NPC)
 
 local NPC = QuickNPC("quest_kleiner", "Dr. Kleiner", "npc_kleiner", "human")
 NPC = AddBool(NPC, false, true, true)
-NPC.Quest = {"quest_killcombinethumper", "quest_arsenalupgrade", "quest_killcombine", 
-"quest_toolwrench", "quest_revolver", "quest_armorupgrade","quest_missionthors", 
+NPC.Quest = {"quest_killcombinethumper", "quest_arsenalupgrade", "quest_killcombine",
+"quest_toolwrench", "quest_revolver", "quest_armorupgrade","quest_missionthors",
 "quest_fortification","quest_oil", "quest_crafting",}
 NPC.DeathDistance = 14
 Register.NPC(NPC)

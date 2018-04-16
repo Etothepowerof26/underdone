@@ -1,17 +1,17 @@
 local function AddModel(tblAddTable, strModel, vecPostion, angAngle, clrColor, strMaterial, vecScale)
-  tblAddTable.Model = tblAddTable.Model or {}
-  if type(tblAddTable.Model) ~= "table" then tblAddTable.Model = {} end
-  table.insert(tblAddTable.Model, {Model = strModel, Position = vecPostion, Angle = angAngle, Color = clrColor, Material = strMaterial, Scale = vecScale})
-  return tblAddTable
+	tblAddTable.Model = tblAddTable.Model or {}
+	if type(tblAddTable.Model) ~= "table" then tblAddTable.Model = {} end
+	table.insert(tblAddTable.Model, {Model = strModel, Position = vecPostion, Angle = angAngle, Color = clrColor, Material = strMaterial, Scale = vecScale})
+	return tblAddTable
 end
 local function AddStats(tblAddTable, strSlot, intArmor)
-  tblAddTable.Slot = strSlot
-  tblAddTable.Armor = intPower
-  return tblAddTable
+	tblAddTable.Slot = strSlot
+	tblAddTable.Armor = intPower
+	return tblAddTable
 end
 local function AddBuff(tblAddTable, strBuff, intAmount)
-  tblAddTable.Buffs[strBuff] = intAmount
-  return tblAddTable
+	tblAddTable.Buffs[strBuff] = intAmount
+	return tblAddTable
 end
 
 local Item = QuickCreateItemTable(BaseArmor, "armor_belt_backpack", "Small Backpacks", "It will add inventory space", "icons/item_cash")

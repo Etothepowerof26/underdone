@@ -7,7 +7,7 @@ function PANEL:Init()
 	self.Maplist:SetMultiSelect(false)
 	self.Maplist:AddColumn("Map Name")
 	for _, strMapName in pairs(tblMapList) do
-		self.Maplist:AddLine(strMapName)  
+		self.Maplist:AddLine(strMapName)
 	end
 	self.Maplist:SelectFirstItem()
 

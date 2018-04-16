@@ -10,12 +10,12 @@ Skill.Desc[3] = "Increase Max Weight by 8"
 Skill.Tier = 4
 Skill.Levels = 3
 function Skill:OnSet(plyPlayer, intSkillLevel, intOldSkillLevel)
-  local tblStatTable = {}
-  tblStatTable[0] = 0
-  tblStatTable[1] = 3
-  tblStatTable[2] = 5
-  tblStatTable[3] = 8
-  plyPlayer:AddStat("stat_maxweight", tblStatTable[intSkillLevel] - tblStatTable[intOldSkillLevel])
+	local tblStatTable = {}
+	tblStatTable[0] = 0
+	tblStatTable[1] = 3
+	tblStatTable[2] = 5
+	tblStatTable[3] = 8
+	plyPlayer:AddStat("stat_maxweight", tblStatTable[intSkillLevel] - tblStatTable[intOldSkillLevel])
 end
 Register.Skill(Skill)
 
@@ -31,12 +31,12 @@ Skill.Tier = 4
 Skill.Levels = 2
 Skill.Hooks = {}
 Skill.Hooks["damage_mod"] = function(plyPlayer, intSkillLevel, intDamage)
-  if not plyPlayer:IsMelee() and plyPlayer:GetActiveAmmoType() == "ar2" and intSkillLevel > 0 then
-    local intPercent = 3
-    if intSkillLevel == 2 then intPercent = 7 end
-    intDamage = intDamage + (intDamage * (intPercent / 100))
-  end
-  return intDamage
+	if not plyPlayer:IsMelee() and plyPlayer:GetActiveAmmoType() == "ar2" and intSkillLevel > 0 then
+		local intPercent = 3
+		if intSkillLevel == 2 then intPercent = 7 end
+		intDamage = intDamage + (intDamage * (intPercent / 100))
+	end
+	return intDamage
 end
 Register.Skill(Skill)
 
@@ -52,12 +52,12 @@ Skill.Tier = 4
 Skill.Levels = 2
 Skill.Hooks = {}
 Skill.Hooks["damage_mod"] = function(plyPlayer, intSkillLevel, intDamage)
-  if not plyPlayer:IsMelee() and plyPlayer:GetActiveAmmoType() == "smg1" and intSkillLevel > 0 then
-    local intPercent = 6
-    if intSkillLevel == 2 then intPercent = 12 end
-    intDamage = intDamage + (intDamage * (intPercent / 100))
-  end
-  return intDamage
+	if not plyPlayer:IsMelee() and plyPlayer:GetActiveAmmoType() == "smg1" and intSkillLevel > 0 then
+		local intPercent = 6
+		if intSkillLevel == 2 then intPercent = 12 end
+		intDamage = intDamage + (intDamage * (intPercent / 100))
+	end
+	return intDamage
 end
 Register.Skill(Skill)
 
@@ -74,12 +74,12 @@ Skill.Tier = 4
 Skill.Levels = 3
 Skill.Hooks = {}
 Skill.Hooks["damage_mod"] = function(plyPlayer, intSkillLevel, intDamage)
-  if not plyPlayer:IsMelee() and plyPlayer:GetActiveAmmoType() == "buckshot" and intSkillLevel > 0 then
-    local intPercent = 5
-    if intSkillLevel == 2 then intPercent = 7 end
-    if intSkillLevel == 3 then intPercent = 10 end
-    intDamage = intDamage + (intDamage * (intPercent / 100))
-  end
-  return intDamage
+	if not plyPlayer:IsMelee() and plyPlayer:GetActiveAmmoType() == "buckshot" and intSkillLevel > 0 then
+		local intPercent = 5
+		if intSkillLevel == 2 then intPercent = 7 end
+		if intSkillLevel == 3 then intPercent = 10 end
+		intDamage = intDamage + (intDamage * (intPercent / 100))
+	end
+	return intDamage
 end
 Register.Skill(Skill)

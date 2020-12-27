@@ -97,8 +97,9 @@ end
 
 if SERVER then
 	function GM:LoadMapObjects()
-		local strFileName = "underdone/Maps/" .. game.GetMap() .. ".txt"
+		local strFileName = "underdone/maps/" .. game.GetMap() .. ".txt"
 		if not file.Exists(strFileName, "DATA") then return end
+		--local tblDecodedTable = glon.decode(file.Read(strFileName, "DATA"))
 		local tblDecodedTable = util.JSONToTable(file.Read(strFileName))
 		for _, SpawnPoint in pairs(tblDecodedTable.NPCSpawnPoints or {}) do
 			GAMEMODE:CreateSpawnPoint(SpawnPoint.Position, SpawnPoint.Angle or Angle(0, 90, 0), SpawnPoint.NPC, SpawnPoint.Level, SpawnPoint.SpawnTime)
@@ -109,7 +110,7 @@ if SERVER then
 	end
 	hook.Add("Initialize", "LoadMapObjects", function() GAMEMODE:LoadMapObjects() end)
 	function GM:SaveMapObjects()
-		local strFileName = "underdone/Maps/" .. game.GetMap() .. ".txt"
+		local strFileName = "underdone/maps/" .. game.GetMap() .. ".txt"
 		local tblSaveTable = table.Copy(GAMEMODE.MapEntities)
 		for _, SpawnPoint in pairs(tblSaveTable.NPCSpawnPoints or {}) do
 			SpawnPoint.Monster = nil
@@ -119,6 +120,7 @@ if SERVER then
 			WorldProp.Entity = nil
 			WorldProp.SpawnProp = nil
 		end
+		--file.Write(strFileName, glon.encode(tblSaveTable))
 		file.Write(strFileName, util.TableToJSON(tblSaveTable))
 	end
 
@@ -140,7 +142,11 @@ if SERVER then
 		if not tblNPCTable then return end
 		if tblNPCTable.SpawnName == "npc_turret_floor" then return end
 		local entNewMonster = ents.Create(tblNPCTable.SpawnName)
-		entNewMonster:SetPos(tblSpawnPoint.Position)
+		if tblNPCTable.AdjustSpawn then
+			entNewMonster:SetPos( tblSpawnPoint.Position + tblNPCTable.AdjustSpawn )
+		else
+			entNewMonster:SetPos( tblSpawnPoint.Position )
+		end
 		entNewMonster:SetAngles(tblSpawnPoint.Angle or Angle(0, 90, 0))
 		entNewMonster:SetKeyValue("spawnflags","512")
 		entNewMonster:DrawShadow(false)

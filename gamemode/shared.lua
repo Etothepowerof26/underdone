@@ -1,7 +1,7 @@
 GM.Name        = "Legacy Underdone"
-GM.Author      = "Polkm, Zeni, TwentySix and Q2F2"
+GM.Author      = "Polkm, Zeni, TwentySix, Q2F2 and Nexeonen"
 GM.Email       = "n/a"
-GM.Website     = "https://github.com/Zeni44/underdone"
+GM.Website     = "https://github.com/Nexeonenn/underdone"
 
 GM.MonsterViewDistance = 200
 GM.RelationHate        = D_HT
@@ -24,6 +24,32 @@ Tan      = Color(178, 161, 126, 255)
 Cream    = Color(245, 255, 154, 255)
 Mooca    = Color(107, 097, 078, 255)
 White    = Color(242, 242, 242, 255)
+
+clrBlack = Color(0, 0, 0, 255)
+clrLightBlack = Color(28, 32, 36, 255)
+clrBrown = Color(127, 51, 0, 255)
+clrGray = Color(97, 95, 90, 255)
+clrDarkGray = Color(43, 42, 39, 255)
+clrGreen = Color(194, 255, 72, 255)
+clrGreen2 = Color(120, 230, 110, 255)
+clrDarkGreen = Color(0, 160, 0, 255)
+clrOrange = Color(255, 137, 44, 255)
+clrPurple = Color(135, 81, 201, 255)
+clrBlue = Color(59, 142, 209, 255)
+clrBlue2 = Color(9, 92, 159, 255)
+clrBlue3 = Color(100, 100, 255, 255)
+clrTan = Color(178, 161, 126, 255)
+clrCream = Color(245, 255, 154, 255)
+clrMooca = Color(107, 97, 78, 255)
+clrWhite = Color(255, 255, 255, 255)
+clrOffWhite = Color(205, 205, 205, 255)
+clrYellow = Color(255, 216, 0, 255)
+clrRed = Color(191, 75, 37, 255)
+clrRed2 = Color(255, 50, 50, 255)
+clrBrightYellow = Color(255, 255, 0, 255)
+clrBrightRed = Color(255, 0, 0, 255)
+clrBrightGreen = Color(0, 255, 0, 255)
+clrBrightBlue = Color(0, 0, 255, 255)
 
 GM.DataBase.Items = {}
 GM.DataBase.Slots = {}

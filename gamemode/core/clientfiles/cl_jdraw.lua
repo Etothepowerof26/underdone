@@ -2,6 +2,21 @@ jdraw = {}
 local GradiantDown = Material("gui/gradient_down")
 local GradiantUp = Material("gui/gradient_up")
 
+local blur = Material('pp/blurscreen')
+
+function draw_Blur(panel, amount) 
+	local x, y = panel:LocalToScreen( 0, 0 )
+	local scrW, scrH = ScrW(), ScrH()
+	surface.SetDrawColor( 255, 255, 255 )
+	surface.SetMaterial( blur )
+	for i = 1, 6 do
+		blur:SetFloat('$blur', (i / 6) * (amount ~= nil and amount or 6))
+		blur:Recompute()
+		render.UpdateScreenEffectTexture()
+		surface.DrawTexturedRect(x * -1, y * -1, scrW, scrH)
+	end
+end
+
 function jdraw.NewPanel(Parent, CopyStyle)
 	local NewPanel = {}
 	NewPanel.Position = {}

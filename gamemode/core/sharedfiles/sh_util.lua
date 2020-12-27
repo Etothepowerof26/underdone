@@ -226,71 +226,42 @@ if SERVER then
 end
 
 if CLIENT then
-	function CreateGenericFrame(Title, Draggable, Close)
-		local NewFrame = vgui.Create("DFrame")
-		NewFrame:SetTitle(Title)
-		NewFrame:SetDraggable(Draggable)
-		NewFrame:ShowCloseButton(Close)
-
-		-- this errors
-		--[[if Close then
-			NewFrame.CloseButton:SetFont("Marlett")
-			NewFrame.CloseButton:SetText("r")
-			NewFrame.CloseButton:SetColor(Color(200, 200, 200, 255))
-			NewFrame.CloseButton.Paint = function() end
-
-			NewFrame.Maxim:SetVisible(false)
-			NewFrame.Minim:SetVisible(false)
-		end]]
-
-		local PaintPanel = jdraw.NewPanel()
-		NewFrame.PaintPanel = PaintPanel
-			PaintPanel:SetStyle(4, Tan)
-			PaintPanel:SetBorder(1, DrakGray)
-
-		local PaintPanel2 = jdraw.NewPanel()
-		NewFrame.PaintPanel2 = PaintPanel2
-			PaintPanel2:SetStyle(4, Gray)
-			PaintPanel2:SetBorder(1, DrakGray)
-
-		function NewFrame:Paint(w, h)
-			self.PaintPanel:SetDimensions(0, 0, w, h)
-			jdraw.DrawPanel(self.PaintPanel)
-
-			self.PaintPanel2:SetDimensions(5, 5, w - 10, 15)
-			jdraw.DrawPanel(self.PaintPanel2)
+	function CreateGenericFrame(strTitle, boolDrag, boolClose)
+		local frmNewFrame = vgui.Create("DFrame")
+		frmNewFrame:SetTitle(strTitle)
+		frmNewFrame:SetDraggable(boolDrag)
+		frmNewFrame:ShowCloseButton(boolClose)
+		frmNewFrame:SetAlpha(255)
+		frmNewFrame.Paint = function( self, w, h )
+			draw_Blur( self, 3 )
+			draw.RoundedBox( 0, 0, 0, frmNewFrame:GetWide(), frmNewFrame:GetTall(), Color( 0, 0, 0, 100 ) )
+			surface.SetDrawColor(0, 0, 0, 255)
+			surface.DrawOutlinedRect( 0, 0, frmNewFrame:GetWide(), frmNewFrame:GetTall() )
 		end
-
-		return NewFrame
+		return frmNewFrame
 	end
 
-	function CreateGenericList(Parent, Spacing, HorizontalScrollEnabled, VerticalScrollEnabled)
-		local NewList = vgui.Create("DPanelList", Parent)
-		NewList:SetSpacing(Spacing)
-		NewList:SetPadding(Spacing)
-		NewList:EnableHorizontal(HorizontalScrollEnabled)
-		NewList:EnableVerticalScrollbar(VerticalScrollEnabled)
-
-		local PaintPanel = jdraw.NewPanel()
-		NewList.PaintPanel = PaintPanel
-			PaintPanel:SetStyle(4, Gray)
-			PaintPanel:SetBorder(1, DrakGray)
-
-		function NewList:Paint(w, h)
-			self.PaintPanel:SetDimensions(0, 0, w, h)
-			jdraw.DrawPanel(self.PaintPanel)
+	function CreateGenericList(pnlParent, intSpacing, boolHorz, boolScrollz)
+		local pnlNewList = vgui.Create("DPanelList", pnlParent)
+		pnlNewList:SetSpacing(intSpacing)
+		pnlNewList:SetPadding(intSpacing)
+		pnlNewList:EnableHorizontal(boolHorz)
+		pnlNewList:EnableVerticalScrollbar(boolScrollz)
+		pnlNewList.Paint = function( self, w, h )
+			draw_Blur( self, 5 )
+			draw.RoundedBox( 0, 0, 0, pnlNewList:GetWide(), pnlNewList:GetTall(), Color( 0, 0, 0, 100 ) )
+			surface.SetDrawColor(0, 0, 0, 255)
+			surface.DrawOutlinedRect( 0, 0, pnlNewList:GetWide(), pnlNewList:GetTall() )
 		end
-
-		return NewList
+		return pnlNewList
 	end
 
-	function CreateGenericLabel(Parent, Font, Text, Color)
-		local Label = vgui.Create("FMultiLabel", Parent)
-		Label:SetFont(Font or "Default")
-		Label:SetText(Text or "Default")
-		Label:SetColor(Color or White)
-
-		return Label
+	function CreateGenericLabel(pnlParent, strFont, strText, clrColor)	
+		local lblNewLabel = vgui.Create("FMultiLabel", pnlParent)
+		lblNewLabel:SetFont(strFont or "Default")
+		lblNewLabel:SetText(strText or "Default")
+		lblNewLabel:SetColor(clrColor or clrWhite)
+		return lblNewLabel
 	end
 
 	local weight_format = "Weight %d/%d"
@@ -340,37 +311,35 @@ if CLIENT then
 		return TabSheet
 	end
 
-	function CreateGenericListItem(HeaderSize, NameText, Desc, Icon, Color, Expandable, Expanded)
-		local NewListItem = vgui.Create("FListItem")
-		NewListItem:SetHeaderSize(intHeaderSize)
-		NewListItem:SetNameText(NameText)
-		NewListItem:SetDescText(Desc)
-		NewListItem:SetIcon(Icon)
-		NewListItem:SetColor(Color)
-		NewListItem:SetExpandable(Expandable)
-		NewListItem:SetExpanded(Expanded)
-
-		return NewListItem
+	function CreateGenericListItem(intHeaderSize, strNameText, strDesc, strIcon, clrColor, boolExpandable, boolExpanded)
+		local lstNewListItem = vgui.Create("FListItem")
+		lstNewListItem:SetHeaderSize(intHeaderSize)
+		lstNewListItem:SetNameText(strNameText)
+		lstNewListItem:SetDescText(strDesc)
+		lstNewListItem:SetIcon(strIcon)
+		lstNewListItem:SetColor(clrColor)
+		lstNewListItem:SetExpandable(boolExpandable)
+		lstNewListItem:SetExpanded(boolExpanded)
+		return lstNewListItem
+	end
+	
+	function CreateGenericSlider(pnlParent, strText, intMin, intMax, intDecimals, strConVar)
+		local nmsNewNumSlider = vgui.Create("DNumSlider", pnlParent)
+		nmsNewNumSlider:SetText(strText)
+		nmsNewNumSlider:SetMin(intMin)
+		nmsNewNumSlider:SetMax(intMax or intMin)
+		nmsNewNumSlider:SetDecimals(intDecimals or 0)
+		nmsNewNumSlider:SetConVar(strConVar)
+		nmsNewNumSlider.TextArea:SetTextColor( Color( 255, 255, 255, 255 ) )
+		return nmsNewNumSlider
 	end
 
-	function CreateGenericSlider(Parent, Text, Min, Max, Decimals, ConVar)
-		local NewNumSlider = vgui.Create("DNumSlider", Parent)
-		NewNumSlider:SetText(Text)
-		NewNumSlider:SetMin(Min)
-		NewNumSlider:SetMax(Max or Min)
-		NewNumSlider:SetDecimals(Decimals or 0)
-		NewNumSlider:SetConVar(ConVar)
-
-		return NewNumSlider
-	end
-
-	function CreateGenericCheckbox(Parent, Text, ConVar)
-		local NewCheckbox = vgui.Create("DCheckboxLabel", Parent)
-		NewCheckbox:SetText(Text)
-		NewCheckbox:SetConVar(ConVar)
-		NewCheckbox:SizeToContents()
-
-		return NewCheckbox
+	function CreateGenericCheckBox(pnlParent, strText, strConVar)
+		local ckbNewCheckBox = vgui.Create( "DCheckBoxLabel", pnlParent)
+		ckbNewCheckBox:SetText(strText)
+		ckbNewCheckBox:SetConVar(strConVar)
+		ckbNewCheckBox:SizeToContents()
+		return ckbNewCheckBox
 	end
 
 	function CreateGenericImageButton(Parent, Image, ToolTip, Callback)
@@ -384,48 +353,40 @@ if CLIENT then
 	end
 
 	local shade = Color(0, 0, 0, 100)
-	function CreateGenericButton(Parent, Text)
-		local NewButton = vgui.Create("DButton", Parent)
-		NewButton:SetText(Text)
-		NewButton:SetTextColor(Color(200, 200, 200, 255))
-
-		function NewButton:Paint(w, h)
-			local DrawColor = Gray
-			local GradDir = 1
-
-			if self:GetDisabled() then
-				DrawColor = ColorCopy(Gray, 100)
-			elseif self.Depressed or self:IsDown() then
-				GradDir = -1
-			elseif NewButton.Hovered then
-				-- TODO: maybe more visual feedback?
+	function CreateGenericButton(pnlParent, strText)
+		local btnNewButton = vgui.Create("DButton", pnlParent)
+		btnNewButton:SetText(strText)
+		btnNewButton:SetColor(clrWhite) -- test
+		btnNewButton.Paint = function(btnNewButton)
+			local clrDrawColor = ColorCopy(clrGray)
+			local intGradDir = 1
+			if btnNewButton:GetDisabled() then
+				clrDrawColor = ColorCopy(clrDarkGray, 100)
+			elseif btnNewButton.Depressed/* || btnNewButton:GetSelected()*/ then
+				intGradDir = -1
+			elseif btnNewButton.Hovered then
 			end
-
-			jdraw.QuickDrawPanel(DrawColor, 0, 0, w, h)
-			jdraw.QuickDrawGrad(shade, 0, 0, w, h, GradDir)
+			jdraw.QuickDrawPanel(clrDrawColor, 0, 0, btnNewButton:GetWide(), btnNewButton:GetTall())
+			jdraw.QuickDrawGrad(Color(0, 0, 0, 100), 0, 0, btnNewButton:GetWide(), btnNewButton:GetTall(), intGradDir)
 		end
-
-		return NewButton
+		return btnNewButton
 	end
 
-	function CreateGenericPanel(Parent, X, Y, Width, Hieght)
-		local NewPanel = vgui.Create("DPanel", Parent)
-		NewPanel:SetPos(X, Y)
-		NewPanel:SetSize(Width, Hieght)
-
-		function NewPanel:Paint(w, h)
-			jdraw.QuickDrawPanel(Gray, 0, 0, w, h)
+	function CreateGenericPanel(pnlParent, intX, intY, intWidth, intHieght)
+		local pnlNewPanel = vgui.Create("DPanel", pnlParent)
+		pnlNewPanel:SetPos(intX, intY)
+		pnlNewPanel:SetSize(intWidth, intHieght)
+		pnlNewPanel.Paint = function()
+			jdraw.QuickDrawPanel(clrTan, 0, 0, pnlNewPanel:GetWide(), pnlNewPanel:GetTall())
 		end
-
-		return NewPanel
+		return pnlNewPanel
 	end
 
-	function CreateGenericMultiChoice(Parent, Text, IsEditable)
-		local NewMultiChoice = vgui.Create("DComboBox", Parent)
-		NewMultiChoice:SetText(Text or "")
-		NewMultiChoice:SetEnabled(IsEditable)
-
-		return NewMultiChoice
+	function CreateGenericMultiChoice(pnlParent, strText, boolEditable)
+		local mlcNewMultiChoice = vgui.Create("DMultiChoice", pnlParent)
+		mlcNewMultiChoice:SetText(strText or "")
+		mlcNewMultiChoice:SetEditable(boolEditable or false)		
+		return mlcNewMultiChoice
 	end
 
 	function CreateGenericCollapse(Parent, Name, Spacing, HorizontalScrollEnabled)

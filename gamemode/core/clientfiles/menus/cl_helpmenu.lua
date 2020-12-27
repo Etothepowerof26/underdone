@@ -2,42 +2,29 @@ GM.HelpMenu = nil
 PANEL = {}
 
 function PANEL:Init()
-	self.Frame = CreateGenericFrame("", false, false)
-	self.Frame.Paint = function() end
+	local helpmenu = vgui.Create( "DFrame" )
+	helpmenu:SetSize( ScrW() / 2, ScrH() / 2 )
+	helpmenu:SetTitle( "Underdone RPG" )
+	helpmenu:MakePopup()
+	helpmenu:Center()
 
-	self.TabSheet = CreateGenericTabPanel(self.Frame)
-	self.Help = self.TabSheet:NewTab("Help", "helptab", "gui/help", "You have come to learn, I am proud.")
-	self.Options = self.TabSheet:NewTab("Options", "optionstab", "gui/options", "Adjust your settings to your liking.")
-	if LocalPlayer():IsAdmin() then
-		self.Admin = self.TabSheet:NewTab("Admin", "admintab", "gui/admin", "For admins only.")
-	end
+	local tabs = vgui.Create( "DPropertySheet", helpmenu )
+	tabs:Dock( FILL )
 
-	self.Frame.CloseButton = vgui.Create("DButton", self.Frame)
-	self.Frame.CloseButton:SetFont("Marlett")
-	self.Frame.CloseButton:SetText("r")
-	self.Frame.CloseButton.DoClick = function(Panel)
-		GAMEMODE.HelpMenu.Frame:Close()
-		GAMEMODE.HelpMenu = nil
-	end
-	self.Frame.CloseButton.Paint = function(w, h)
-		jdraw.QuickDrawPanel(Gray, 0, 0, w - 1, h - 1)
-	end
-	self.Frame:MakePopup()
-	self:PerformLayout()
-end
-
-function PANEL:PerformLayout()
-	self.Frame:SetPos(self:GetPos())
-	self.Frame:SetSize(self:GetSize())
-	self.Frame.CloseButton:SetPos(self.Frame:GetWide() - 5, 10)
-
-	self.TabSheet:SetPos(5, 5)
-	self.TabSheet:SetSize(self.Frame:GetWide() - 10, self.Frame:GetTall() - 10)
+	local tab1panel = vgui.Create( "helptab" )
+	local tab2panel = vgui.Create( "optionstab" )
+	//if LocalPlayer():IsAdmin() then 
+	//local tab3panel = vgui.Create( "admintab" )
+	//end
+	
+	tabs:AddSheet( "Underdone RPG FAQ", tab1panel, "icon16/information.png", false, false, "A Quick Underdone RPG FAQ, More Information Can Be Found On The Wiki By Typing In Chat '/wiki'" )
+	tabs:AddSheet( "Underdone RPG Options", tab2panel, "icon16/cog.png", false, false, "Options For Underdone RPG" )
+	//if LocalPlayer():IsAdmin() then
+	//tabs:AddSheet( "Underdone RPG Admin Options", tab3panel, "icon16/user_suit.png", false, false, "Description of third tab" )
+	//end
 end
 vgui.Register("helpmenu", PANEL, "Panel")
 
 concommand.Add("UD_OpenHelp", function(ply, command, args)
-	GAMEMODE.HelpMenu = GAMEMODE.HelpMenu or vgui.Create("helpmenu")
-	GAMEMODE.HelpMenu:SetSize(600, 450)
-	GAMEMODE.HelpMenu:Center()
+	vgui.Create("helpmenu")
 end)
